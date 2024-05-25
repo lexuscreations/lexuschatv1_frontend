@@ -1,0 +1,47 @@
+body {
+  background: url(../public/bg.avif);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 0.25rem;
+}
+
+*::-webkit-scrollbar-track {
+  background: #e3e3e3;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  border: 1px none #8c8c8c;
+  background-color: #60636c;
+}
+
+@media (prefers-color-scheme: dark) {
+  .divider:after,
+  .divider:before {
+    background-color: oklch(0.75 0.02 264.44);
+  }
+}
+
+.chatBackground {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
