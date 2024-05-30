@@ -5,8 +5,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./App.css";
 
-import { BASE_URL } from "./config";
 import { setSocket } from "./redux/socketSlice";
+import { SOCKET_SERVER_BASE_URL } from "./config";
 import { setOnlineUsers } from "./redux/userSlice";
 import ErrorBoundary from "./components/ErrorBoundary";
 
@@ -64,7 +64,9 @@ const App = () => {
 
   useEffect(() => {
     if (authUser) {
-      const socketIo = io(BASE_URL, { query: { userId: authUser._id } });
+      const socketIo = io(SOCKET_SERVER_BASE_URL, {
+        query: { userId: authUser._id },
+      });
 
       if (socketIo) {
         socketRef.current = socketIo;

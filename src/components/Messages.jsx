@@ -20,7 +20,7 @@ const Messages = React.memo(() => {
   );
 
   return (
-    <div className="px-4 overflow-auto h-[17vh] md:h-full">
+    <div className="px-4 overflow-auto h-[21.2vh] lg:h-full">
       {memoizedMessages}
     </div>
   );

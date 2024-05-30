@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from "react";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
-import { BASE_URL } from "../../config";
+import { apiService } from "../../api/api";
+import { USER_LOGIN_ENDPOINT } from "../../api/endpoints";
 
 import { setAuthUser } from "../../redux/userSlice";
 
@@ -34,8 +34,6 @@ const Login = () => {
     async (e) => {
       e.preventDefault();
 
-      const URL = `${BASE_URL}/api/v1/user/login`;
-
       const config = {
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
@@ -44,7 +42,7 @@ const Login = () => {
       if (!isValidUser(user)) return;
 
       try {
-        const res = await axios.post(URL, user, config);
+        const res = await apiService.post(USER_LOGIN_ENDPOINT, user, config);
 
         if (!(res && res.data)) throw new Error("Invalid response format");
 
@@ -72,7 +70,7 @@ const Login = () => {
   );
 
   return (
-    <div className="md:min-w-96 mx-auto">
+    <div className="lg:min-w-96 mx-auto">
       <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-gray-100">
         <h1 className="text-3xl font-bold text-center">Login</h1>
 

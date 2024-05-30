@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { IoSend } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +12,8 @@ import {
   setSelectedUser,
 } from "../redux/userSlice";
 
-import { BASE_URL } from "../config";
+import { apiService } from "../api/api";
+import { SEND_MESSAGE_TO_USER_ENDPOINT } from "../api/endpoints";
 import { getCurrentFormattedDateTime, playNotificationSound } from "../utils";
 
 const messageFieldStateInitialValues = "";
@@ -64,7 +64,7 @@ const SendInput = React.memo(() => {
 
       if (!isValidMessage(message)) return toast.error("Type a valid message");
 
-      const URL = `${BASE_URL}/api/v1/message/send/${selectedUser?._id}`;
+      const URL = SEND_MESSAGE_TO_USER_ENDPOINT(selectedUser?._id);
       const postData = { message };
 
       const config = {
@@ -75,7 +75,7 @@ const SendInput = React.memo(() => {
       try {
         dispatch(setGlobalLoading(true));
 
-        const res = await axios.post(URL, postData, config);
+        const res = await apiService.post(URL, postData, config);
 
         if (!(res && res.data && res.data.newMessage))
           throw new Error("Invalid response format");

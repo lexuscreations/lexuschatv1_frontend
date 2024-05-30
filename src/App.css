@@ -1,8 +1,8 @@
 body {
-  background: url(../public/bg.avif);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background: url(../public/bg.avif);
 
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -44,4 +44,8 @@ code {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.dropdown.dropdown-close .dropdown-content {
+  display: none;
 }

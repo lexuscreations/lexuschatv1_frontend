@@ -5,7 +5,6 @@ import React, {
   useEffect,
   useCallback,
 } from "react";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
 import { setMessages } from "../redux/messageSlice";
@@ -15,7 +14,8 @@ import {
   setSelectedUser,
 } from "../redux/userSlice";
 
-import { BASE_URL } from "../config";
+import { apiService } from "../api/api";
+import { USER_SEARCH_ENDPOINT } from "../api/endpoints";
 import {
   debounce,
   showNotification,
@@ -48,7 +48,7 @@ const Sidebar = () => {
 
   const debouncedSearch = useRef(
     debounce(async (searchText) => {
-      const response = await axios.get(`${BASE_URL}/api/v1/user/search`, {
+      const response = await apiService.get(USER_SEARCH_ENDPOINT, {
         params: { searchText },
       });
       setSearchedUsers(response.data);
@@ -77,6 +77,8 @@ const Sidebar = () => {
   const handleNewMessage = useCallback(
     (data = {}) => {
       const { newMessage = {}, sender = {} } = data;
+
+      console.log("sender", sender);
 
       if (
         !(
@@ -111,6 +113,7 @@ const Sidebar = () => {
         usersCopy.unshift({
           _id: sender?.senderId,
           fullName: sender?.fullName,
+          username: sender?.username,
           profilePhoto: sender?.profilePhoto,
           ...newMsgCommData,
         });
@@ -139,7 +142,7 @@ const Sidebar = () => {
         ])
       );
     },
-    [dispatch, messages, otherUsers, selectedUser]
+    [dispatch, messages, otherUsers, selectedUser, onlineUsers]
   );
 
   useEffect(() => {
@@ -159,7 +162,7 @@ const Sidebar = () => {
   }, [otherUsers]);
 
   return (
-    <div className="border-r border-slate-500 p-4 flex flex-col w-auto md:w-[22.5rem] relative">
+    <div className="border-r border-slate-500 p-4 flex flex-col w-auto lg:w-[22.5rem] relative">
       <form
         onSubmit={(e) => e.preventDefault()}
         className="flex items-center gap-2"
@@ -197,7 +200,7 @@ const Sidebar = () => {
 
               <div className="flex flex-col flex-1">
                 {user?.fullName && (
-                  <div className="flex justify-between gap-2">
+                  <div className="flex justify-between gap-2 font-medium">
                     <p>{user?.fullName}</p>
                   </div>
                 )}

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 
-import { BASE_URL } from "../config";
+import { apiService } from "../api/api";
+import { GET_MESSAGE_OF_USER_ENDPOINT } from "../api/endpoints";
 
 import { setMessages } from "../redux/messageSlice";
 import { setGlobalLoading } from "../redux/uiSlice";
@@ -18,11 +18,13 @@ const useGetMessages = () => {
     const fetchMessages = async () => {
       try {
         dispatch(setGlobalLoading(true));
-        axios.defaults.withCredentials = true;
         const res =
-          (await axios.get(`${BASE_URL}/api/v1/message/${selectedUser?._id}`, {
-            signal,
-          })) || {};
+          (await apiService.get(
+            GET_MESSAGE_OF_USER_ENDPOINT(selectedUser?._id),
+            {
+              signal,
+            }
+          )) || {};
         dispatch(setMessages(res.data || []));
       } catch (error) {
         console.error("Error fetching messages:", error);

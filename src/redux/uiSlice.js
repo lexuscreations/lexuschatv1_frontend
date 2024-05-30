@@ -4,22 +4,22 @@ const uiSlice = createSlice({
   name: "ui",
   initialState: {
     globalLoading: false,
-    chatBackgroundImage: "",
-    settingsPageOpen: false,
+    chatBackground: "",
+    isSettingsPageOpen: false,
   },
   reducers: {
     setGlobalLoading: (state, action) => {
       state.globalLoading = action.payload;
     },
-    setSettingsPageOpen: (state, action) => {
-      state.settingsPageOpen = action.payload;
+    setIsSettingsPageOpen: (state, action) => {
+      state.isSettingsPageOpen = action.payload;
     },
-    setChatBackgroundImage: (state, action) => {
-      state.chatBackgroundImage = action.payload;
+    setChatBackground: (state, action) => {
+      state.chatBackground = action.payload;
     },
   },
 });
 
-export const { setGlobalLoading, setSettingsPageOpen, setChatBackgroundImage } =
+export const { setGlobalLoading, setChatBackground, setIsSettingsPageOpen } =
   uiSlice.actions;
 export default uiSlice.reducer;

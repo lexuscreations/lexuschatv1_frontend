@@ -1,10 +1,7 @@
 import { useEffect } from "react";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
-import { BASE_URL } from "../config";
 
 import { setGlobalLoading } from "../redux/uiSlice";
 import { setMessages } from "../redux/messageSlice";
@@ -13,6 +10,9 @@ import {
   setOtherUsers,
   setSelectedUser,
 } from "../redux/userSlice";
+
+import { apiService, axios } from "../api/api";
+import { GET_USER_CONVERSATIONAL_USERS_ENDPOINTS } from "../api/endpoints";
 
 const useGetOtherUsers = () => {
   const dispatch = useDispatch();
@@ -24,12 +24,10 @@ const useGetOtherUsers = () => {
 
     const fetchOtherUsers = async () => {
       try {
-        axios.defaults.withCredentials = true;
-
         dispatch(setGlobalLoading(true));
 
         const res =
-          (await axios.get(`${BASE_URL}/api/v1/user/conversational_users`, {
+          (await apiService.get(GET_USER_CONVERSATIONAL_USERS_ENDPOINTS, {
             signal,
           })) || {};
 

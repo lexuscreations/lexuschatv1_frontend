@@ -3,11 +3,13 @@ import { MdSpeed } from "react-icons/md";
 import { ImConnection } from "react-icons/im";
 import { TbCloudDataConnection } from "react-icons/tb";
 
-import { BASE_URL } from "../config";
+import { apiService } from "../api/api";
+import { PING_ENDPOINT } from "../api/endpoints";
+import { imgUrlToTestInternetSpeed } from "../config";
 
 const isPingSuccess = async (signal) => {
   try {
-    const response = await fetch(`${BASE_URL}/ping`, { signal });
+    const response = await apiService.get(PING_ENDPOINT, { signal });
     return response.ok;
   } catch (error) {
     return false;
@@ -46,7 +48,7 @@ const Footer = () => {
         duration < 50 ? "Rapid" : duration < 100 ? "Standard" : "Gradual";
       dispatch({ type: "SET_INTERNET_SPEED", payload: speed });
     };
-    img.src = "https://xsgames.co/randomusers/assets/avatars/male/2.jpg";
+    img.src = imgUrlToTestInternetSpeed;
   }, [dispatch]);
 
   useEffect(() => {
@@ -99,7 +101,7 @@ const Footer = () => {
   const { internetSpeed, internetStatus, connectionStatus } = state;
 
   return (
-    <div className="w-full md:w-9/12 rounded-lg flex gap-2 overflow-x-auto items-center bg-zinc-800 text-white px-4 py-2 mt-2 min-h-10">
+    <div className="w-full lg:w-9/12 rounded-lg flex gap-2 overflow-x-auto items-center bg-zinc-800 text-white px-4 py-2 mt-2 min-h-11">
       <div
         className="flex items-center transition-all select-none hover:bg-gray-700/65 px-1.5 rounded-lg"
         title="Speed"

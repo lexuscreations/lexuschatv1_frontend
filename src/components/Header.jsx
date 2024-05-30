@@ -1,13 +1,14 @@
-import React, { useCallback } from "react";
-import axios from "axios";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
+import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
 import { CgMoreVertical } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
 
-import { BASE_URL } from "../config";
+import { apiService, axios } from "../api/api";
 import { setMessages } from "../redux/messageSlice";
-import { setGlobalLoading, setSettingsPageOpen } from "../redux/uiSlice";
+import { USER_LOGOUT_ENDPOINT } from "../api/endpoints";
+import { setGlobalLoading, setIsSettingsPageOpen } from "../redux/uiSlice";
 import {
   setAuthUser,
   setOtherUsers,
@@ -17,7 +18,11 @@ import {
 import avatarImage from "../assets/avatar.jpg";
 
 const Header = () => {
+  const [isActionDropdownOpen, setIsActionDropdownOpen] = useState(false);
+
   const authUser = useSelector((store) => store?.user?.authUser) || {};
+
+  const actionDropdownRef = useRef(null);
 
   const { fullName, profilePhoto, username } = authUser;
 
@@ -28,7 +33,7 @@ const Header = () => {
     try {
       dispatch(setGlobalLoading(true));
 
-      const res = await axios.get(`${BASE_URL}/api/v1/user/logout`);
+      const res = await apiService.get(USER_LOGOUT_ENDPOINT);
 
       navigate("/login");
 
@@ -54,11 +59,27 @@ const Header = () => {
   }, [dispatch, navigate]);
 
   const settingsHandler = useCallback(() => {
-    dispatch(setSettingsPageOpen(true));
+    dispatch(setIsSettingsPageOpen(true));
   }, [dispatch]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        actionDropdownRef.current &&
+        !actionDropdownRef.current.contains(event.target)
+      )
+        setIsActionDropdownOpen(false);
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="w-full md:w-9/12 rounded-lg flex gap-2 items-center bg-zinc-800 text-white px-4 py-2 mb-2">
+    <div className="w-full lg:w-9/12 rounded-lg flex gap-2 items-center bg-zinc-800 text-white px-4 py-2 mb-2">
       <div className={`avatar online`}>
         <div className="w-12 rounded-full">
           <img src={profilePhoto || avatarImage} alt="user" />
@@ -67,7 +88,7 @@ const Header = () => {
 
       <div className="flex flex-col flex-1">
         {fullName && (
-          <div className="flex justify-between gap-2">
+          <div className="flex justify-between gap-2 font-medium">
             <p>{fullName}</p>
           </div>
         )}
@@ -75,12 +96,11 @@ const Header = () => {
 
       <div className="dropdown dropdown-end">
         <div
-          tabIndex={0}
           role="button"
-          className="btn btn-circle btn-ghost btn-xs text-info transition-all hover:scale-105 flex items-center"
+          tabIndex={0}
+          className="btn btn-circle btn-ghost btn-xs text-info transition-all hover:brightness-75 hover:scale-105 flex items-center"
         >
           <svg
-            tabIndex={0}
             fill="none"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
@@ -95,38 +115,48 @@ const Header = () => {
           </svg>
         </div>
 
-        <div
-          tabIndex={0}
-          className="card compact dropdown-content z-[1] shadow bg-base-100 rounded-box w-auto mt-2"
-        >
-          <div
-            tabIndex={0}
-            className="card-body text-gray-500 font-bold flex flex-row"
-          >
+        <div className="card compact dropdown-content z-[1] shadow bg-base-100 rounded-box w-auto mt-2">
+          <div className="card-body text-gray-500 font-bold flex flex-row">
             <h2>Username:</h2>
             <p>{username}</p>
           </div>
         </div>
       </div>
 
-      <div className="dropdown dropdown-hover dropdown-close dropdown-end cursor-pointer pb-[0.5rem] top-[0.3rem]">
+      <div
+        ref={actionDropdownRef}
+        className={classNames(
+          { "dropdown-close": !isActionDropdownOpen },
+          "dropdown dropdown-end cursor-pointer pb-[0.5rem] top-[0.3rem]"
+        )}
+      >
         <CgMoreVertical
           tabIndex={0}
-          className="cursor-pointer m-1 transition-all hover:scale-110 active:scale-95"
+          onClick={() => setIsActionDropdownOpen(true)}
+          className="cursor-pointer m-1 transition-all hover:brightness-75 hover:scale-105 active:scale-95"
         />
 
-        <ul
-          tabIndex={0}
-          className="dropdown-content z-[1] menu p-2 shadow bg-base-100 text-black w-auto rounded-box text-nowrap mt-[0.3rem]"
-        >
+        <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 text-black w-auto rounded-box text-nowrap mt-[0.3rem]">
           <li>
-            <button onClick={settingsHandler} className="btn btn-sm">
+            <button
+              onClick={() => {
+                setIsActionDropdownOpen(false);
+                settingsHandler();
+              }}
+              className="btn btn-sm"
+            >
               Settings
             </button>
           </li>
 
           <li>
-            <button onClick={logoutHandler} className="btn btn-sm">
+            <button
+              onClick={() => {
+                setIsActionDropdownOpen(false);
+                logoutHandler();
+              }}
+              className="btn btn-sm"
+            >
               Logout
             </button>
           </li>

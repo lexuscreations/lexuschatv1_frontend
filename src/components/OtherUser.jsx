@@ -64,7 +64,7 @@ const OtherUser = ({ user = {}, isOnline }) => {
           <div className="flex justify-between items-center flex-1">
             {user?.fullName && (
               <p
-                className="text-nowrap text-ellipsis overflow-hidden w-full md:w-16 lg:w-auto"
+                className="text-nowrap text-ellipsis overflow-hidden w-full lg:w-16 xl:w-auto font-medium"
                 title={user?.fullName}
               >
                 {user?.fullName}
@@ -85,7 +85,7 @@ const OtherUser = ({ user = {}, isOnline }) => {
             <div className="flex justify-between items-center flex-1">
               {user?.lastMessage && (
                 <p
-                  className="text-nowrap text-ellipsis overflow-hidden w-20 md:w-16 lg:w-24"
+                  className="text-nowrap text-ellipsis overflow-hidden w-20 lg:w-16 xl:w-24"
                   title={user?.lastMessage}
                 >
                   {`${user?.lastMessageSender === "self" ? "You: " : ""}${
@@ -96,7 +96,7 @@ const OtherUser = ({ user = {}, isOnline }) => {
 
               {user?.lastMessageTime && (
                 <p
-                  className="text-nowrap text-ellipsis overflow-hidden w-auto md:w-16 lg:w-auto"
+                  className="text-nowrap text-ellipsis overflow-hidden w-auto lg:w-16 xl:w-auto"
                   title={formatDateTime(user?.lastMessageTime)}
                 >
                   {formatDateTime(user?.lastMessageTime)}

@@ -12,8 +12,8 @@ const MessageContainer = () => {
   const [isTyping, setIsTyping] = useState(false);
 
   const socket = useSelector(({ socket }) => socket?.socket);
-  const chatBackgroundImage =
-    useSelector((store) => store?.ui?.chatBackgroundImage) || "";
+  const chatBackground =
+    useSelector((store) => store?.ui?.chatBackground) || "";
   const {
     authUser = {},
     onlineUsers = [],
@@ -51,13 +51,26 @@ const MessageContainer = () => {
     };
   }, [socket, handleTypingChangeEvent]);
 
-  return selectedUser ? (
+  if (!selectedUser)
+    return (
+      <div className="flex flex-col justify-center items-center h-[38.5vh] lg:h-auto w-full">
+        <h1 className="text-4xl text-white font-bold rounded pt-0 p-1 bg-[#6862624a] text-center">
+          Hi, {authUser?.fullName}
+        </h1>
+
+        <h1 className="text-2xl text-white rounded rounded-t-none pt-0 p-1 bg-[#6862624a] text-center">
+          Let's start a conversation
+        </h1>
+      </div>
+    );
+
+  return (
     <div
       className="flex flex-col flex-1 chatBackground"
       style={
-        chatBackgroundImage
+        chatBackground
           ? {
-              backgroundImage: `URL(https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/${chatBackgroundImage})`,
+              background: chatBackground,
             }
           : {}
       }
@@ -75,7 +88,7 @@ const MessageContainer = () => {
 
         <div className="flex flex-col flex-1">
           {userFullName && (
-            <div className="flex justify-between gap-2">
+            <div className="flex justify-between gap-2 font-medium">
               <p>{userFullName}</p>
             </div>
           )}
@@ -110,13 +123,6 @@ const MessageContainer = () => {
 
       <Messages />
       <SendInput />
-    </div>
-  ) : (
-    <div className="flex flex-col justify-center items-center h-[38.5vh] md:h-auto w-full">
-      <h1 className="text-4xl text-white font-bold">
-        Hi, {authUser?.fullName}
-      </h1>
-      <h1 className="text-2xl text-white">Let's start a conversation</h1>
     </div>
   );
 };

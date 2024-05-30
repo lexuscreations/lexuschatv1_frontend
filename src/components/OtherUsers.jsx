@@ -7,7 +7,7 @@ const OtherUsers = ({ otherUsers = [] }) => {
   const onlineUsers = useSelector(({ user }) => user?.onlineUsers) || [];
 
   return (
-    <div className="overflow-auto h-[22vh]">
+    <div className="overflow-auto min-h-[8.5rem] max-h-[11rem] lg:max-h-full">
       {otherUsers?.map?.((user = {}) => (
         <OtherUser
           user={user}
