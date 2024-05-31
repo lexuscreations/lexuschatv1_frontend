@@ -1,1 +1,1 @@
-<!-- lexuschatv1_frontend -->
+lexuschatv1_frontend
