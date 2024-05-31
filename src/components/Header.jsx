@@ -149,7 +149,7 @@ const Header = () => {
                 setIsActionDropdownOpen(false);
                 settingsHandler();
               }}
-              className="btn btn-sm dark:bg-[#28293b] dark:border-none"
+              className="btn btn-sm bg-white hover:bg-gray-200 text-black dark:text-white dark:bg-[#28293b] dark:hover:bg-[#4c4f70] dark:border-none"
             >
               Settings
             </button>
@@ -161,7 +161,7 @@ const Header = () => {
                 setIsActionDropdownOpen(false);
                 logoutHandler();
               }}
-              className="btn btn-sm dark:bg-[#28293b] dark:border-none"
+              className="btn btn-sm bg-white hover:bg-gray-200 text-black dark:text-white dark:bg-[#28293b] dark:hover:bg-[#4c4f70] dark:border-none"
             >
               Logout
             </button>

@@ -10,7 +10,7 @@ import { imgUrlToTestInternetSpeed } from "../config";
 const isPingSuccess = async (signal) => {
   try {
     const response = await apiService.get(PING_ENDPOINT, { signal });
-    return response.ok;
+    return response.statusText === "OK";
   } catch (error) {
     return false;
   }

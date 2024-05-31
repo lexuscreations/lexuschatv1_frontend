@@ -104,7 +104,7 @@ const MessageContainer = () => {
         </div>
 
         <button
-          className="btn btn-circle min-w-8 min-h-8 h-8 w-8 hover:brightness-90"
+          className="btn btn-circle min-w-8 min-h-8 h-8 w-8 brightness-95 hover:brightness-90 absolute top-4 right-4 shadow-lg bg-white dark:bg-slate-800 border-none text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-950"
           onClick={handleCloseChatClick}
         >
           <svg

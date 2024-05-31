@@ -90,7 +90,46 @@ const App = () => {
 
   useEffect(() => {
     dispatch(setGlobalLoading(false));
-  }, []);
+
+    document
+      .querySelector("body")
+      .classList.add(
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light"
+      );
+
+    const darkThemeListener = ({ matches }) => {
+      if (matches) {
+        document.querySelector("body").classList.add("dark");
+        document.querySelector("body").classList.remove("light");
+      }
+    };
+
+    const lightThemeListener = ({ matches }) => {
+      if (matches) {
+        document.querySelector("body").classList.remove("dark");
+        document.querySelector("body").classList.add("light");
+      }
+    };
+
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", darkThemeListener);
+
+    window
+      .matchMedia("(prefers-color-scheme: light)")
+      .addEventListener("change", lightThemeListener);
+
+    return () => {
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .removeEventListener("change", darkThemeListener);
+      window
+        .matchMedia("(prefers-color-scheme: light)")
+        .removeEventListener("change", lightThemeListener);
+    };
+  }, [dispatch]);
 
   const memoizedRouter = useMemo(() => router, []);
 

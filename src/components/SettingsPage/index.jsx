@@ -70,6 +70,33 @@ const SettingsPageContComp = () => {
               }
             },
           },
+          [settingsConfigKeyMap.primary.settings_primary_chat_key.secondary
+            .settings_primary_chat_secondary_theme_key.tertiary
+            .settings_primary_chat_secondary_theme_tertiary_chooseAppTheme.key]:
+            {
+              onsaveHandlerFn: (val) => {
+                if (val === "dark") {
+                  document.querySelector("body").classList.remove("light");
+                  document.querySelector("body").classList.add("dark");
+                } else if (val === "light") {
+                  document.querySelector("body").classList.remove("dark");
+                  document.querySelector("body").classList.add("light");
+                } else {
+                  document.querySelector("body").classList.remove("dark");
+                  document.querySelector("body").classList.remove("light");
+
+                  document
+                    .querySelector("body")
+                    .classList.add(
+                      window.matchMedia("(prefers-color-scheme: dark)").matches
+                        ? "dark"
+                        : "light"
+                    );
+                }
+
+                setSettingsTertiaryActiveKey(null);
+              },
+            },
         },
       },
     }),
