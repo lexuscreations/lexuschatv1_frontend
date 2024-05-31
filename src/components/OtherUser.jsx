@@ -15,11 +15,6 @@ const OtherUser = ({ user = {}, isOnline }) => {
 
   const dispatch = useDispatch();
 
-  const selectedUserHandler = useCallback(
-    (user) => dispatch(setSelectedUser(user)),
-    [dispatch]
-  );
-
   const isThisSelectedUser = selectedUser?._id === user?._id;
 
   const isNewMessageUnreadWithCount = 0;
@@ -45,7 +40,7 @@ const OtherUser = ({ user = {}, isOnline }) => {
   return (
     <>
       <div
-        onClick={() => selectedUserHandler(user)}
+        onClick={() => dispatch(setSelectedUser(user))}
         className={`${
           isThisSelectedUser
             ? "bg-zinc-200 dark:bg-[#1f2131] dark:text-white text-black"

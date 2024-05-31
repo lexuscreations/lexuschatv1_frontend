@@ -34,7 +34,7 @@ const useGetOtherUsers = () => {
         dispatch(setOtherUsers(res.data || []));
       } catch (error) {
         if (axios.isCancel(error)) {
-          console.log("Request cancelled:", error.message);
+          console.warn("Request cancelled:", error.message);
         } else if (
           error.response &&
           error.response.data &&

@@ -45,7 +45,7 @@ const Header = () => {
       dispatch(setSelectedUser(null));
     } catch (error) {
       if (axios.isCancel(error)) {
-        console.log("Request cancelled:", error.message);
+        console.warn("Request cancelled:", error.message);
       } else if (error.response) {
       } else if (error.request) {
         console.error(error.request);
@@ -54,6 +54,7 @@ const Header = () => {
         console.error("Error", error.message);
       }
     } finally {
+      navigate("/login");
       dispatch(setGlobalLoading(false));
     }
   }, [dispatch, navigate]);

@@ -78,8 +78,6 @@ const Sidebar = () => {
     (data = {}) => {
       const { newMessage = {}, sender = {} } = data;
 
-      console.log("sender", sender);
-
       if (
         !(
           data &&
