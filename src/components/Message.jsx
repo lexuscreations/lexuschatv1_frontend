@@ -40,7 +40,10 @@ const Message = ({ message }) => {
 
       <div
         className={classNames("chat-bubble", {
-          "bg-gray-200 text-black": senderId !== authUser?._id,
+          "dark:bg-white dark:text-[#2d2f43] bg-[#2d2f43] text-white":
+            senderId !== authUser?._id,
+          "dark:bg-[#2d2f43] dark:text-white bg-white text-[#2d2f43]":
+            senderId === authUser?._id,
         })}
       >
         {isLink(message?.message) ? (

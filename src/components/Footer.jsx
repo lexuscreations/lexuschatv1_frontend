@@ -101,9 +101,9 @@ const Footer = () => {
   const { internetSpeed, internetStatus, connectionStatus } = state;
 
   return (
-    <div className="w-full lg:w-9/12 rounded-lg flex gap-2 overflow-x-auto items-center bg-zinc-800 text-white px-4 py-2 mt-2 min-h-11">
+    <div className="w-full lg:w-9/12 rounded-lg flex gap-2 overflow-x-auto items-center dark:bg-[#2d2f43] bg-white dark:text-white text-black px-4 py-2 mt-2 min-h-11">
       <div
-        className="flex items-center transition-all select-none hover:bg-gray-700/65 px-1.5 rounded-lg"
+        className="flex items-center transition-all select-none hover:bg-gray-300/65 dark:hover:bg-gray-900/65 px-1.5 rounded-lg"
         title="Speed"
       >
         <MdSpeed />
@@ -113,7 +113,7 @@ const Footer = () => {
       <span>|</span>
 
       <div
-        className="flex items-center transition-all select-none hover:bg-gray-700/65 px-1.5 rounded-lg"
+        className="flex items-center transition-all select-none hover:bg-gray-300/65 dark:hover:bg-gray-900/65 px-1.5 rounded-lg"
         title="Status"
       >
         <ImConnection />
@@ -135,7 +135,7 @@ const Footer = () => {
       <span>|</span>
 
       <div
-        className="flex items-center transition-all select-none hover:bg-gray-700/65 px-1.5 rounded-lg"
+        className="flex items-center transition-all select-none hover:bg-gray-300/65 dark:hover:bg-gray-900/65 px-1.5 rounded-lg"
         title="Server, Refresh tab if experiencing issues."
       >
         <TbCloudDataConnection />

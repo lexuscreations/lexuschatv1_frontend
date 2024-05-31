@@ -80,9 +80,6 @@ const HomePage = () => {
       <CompWithPageContainerCommon>
         {sidebarMemo}
         {messageContainerMemo}
-        <Suspense fallback={<Loading />}>
-          <Loading />
-        </Suspense>
       </CompWithPageContainerCommon>
     ),
     [sidebarMemo, messageContainerMemo]
@@ -92,6 +89,7 @@ const HomePage = () => {
     <div className="flex-1 w-full h-full flex items-center flex-col justify-center">
       {headerMemo}
       {!isSettingsPageOpen ? mainContent : settingsPageMemo}
+      <Loading />
       {footerMemo}
     </div>
   );

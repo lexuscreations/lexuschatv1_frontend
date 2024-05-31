@@ -162,7 +162,7 @@ const Sidebar = () => {
   }, [otherUsers]);
 
   return (
-    <div className="border-r border-slate-500 p-4 flex flex-col w-auto lg:w-[22.5rem] relative">
+    <div className="lg:border-r lg:border-[oklch(0.75 0.02 264.44)] p-4 flex flex-col w-auto lg:w-[22.5rem] relative">
       <form
         onSubmit={(e) => e.preventDefault()}
         className="flex items-center gap-2"
@@ -172,7 +172,7 @@ const Sidebar = () => {
           value={search}
           placeholder="Search..."
           onChange={onSearchInputChange}
-          className="input input-bordered rounded-md w-full"
+          className="input input-bordered rounded-md w-full dark:bg-[#2d2f43] dark:text-white bg-white text-black font-semibold"
         />
       </form>
 
@@ -190,7 +190,7 @@ const Sidebar = () => {
           <React.Fragment key={user._id}>
             <div
               onClick={() => onSearchUserClickHandler(user)}
-              className="text-white flex gap-2 hover:text-black items-center bg-[#62737b] active:scale-95 hover:bg-zinc-200 rounded transition-all p-3 cursor-pointer"
+              className="flex gap-2 items-center text-white dark:hover:text-white hover:text-black dark:bg-[#4c4f70] bg-[#91b6c7] dark:hover:bg-[#2d2f43] hover:bg-zinc-200 active:scale-95 rounded transition-all p-3 cursor-pointer"
             >
               <div className="avatar">
                 <div className="w-12 rounded-full">

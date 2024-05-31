@@ -158,7 +158,7 @@ const SendInput = React.memo(() => {
           value={message}
           placeholder="Send a message..."
           onChange={(e) => setMessage(e.target.value)}
-          className="border text-sm rounded-lg block w-full p-3 border-zinc-500 bg-gray-600 text-white"
+          className="border text-sm rounded-lg block w-full p-3 border-zinc-500 dark:bg-[#2d2f43] dark:text-white bg-white text-black font-semibold"
         />
 
         {message && (

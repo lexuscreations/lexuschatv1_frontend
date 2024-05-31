@@ -46,9 +46,11 @@ const OtherUser = ({ user = {}, isOnline }) => {
     <>
       <div
         onClick={() => selectedUserHandler(user)}
-        className={` ${
-          isThisSelectedUser ? "bg-zinc-200 text-black" : "text-white"
-        } flex gap-2 hover:text-black items-center active:scale-95 hover:bg-zinc-100 rounded-s transition-all p-2 cursor-pointer overflow-x-auto`}
+        className={`${
+          isThisSelectedUser
+            ? "bg-zinc-200 dark:bg-[#1f2131] dark:text-white text-black"
+            : "text-white"
+        } flex gap-2 dark:hover:text-white hover:text-black items-center active:scale-95 dark:hover:bg-[#2d2f43] hover:bg-zinc-100 rounded-s transition-all p-2 cursor-pointer overflow-x-auto`}
       >
         <div
           className={`avatar ${

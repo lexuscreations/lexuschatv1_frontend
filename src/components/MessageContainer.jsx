@@ -54,11 +54,11 @@ const MessageContainer = () => {
   if (!selectedUser)
     return (
       <div className="flex flex-col justify-center items-center h-[38.5vh] lg:h-auto w-full">
-        <h1 className="text-4xl text-white font-bold rounded pt-0 p-1 bg-[#6862624a] text-center">
+        <h1 className="text-4xl text-white dark:text-[#2d2f43] font-bold rounded pt-0 p-1 bg-[#4c4f703d] text-center">
           Hi, {authUser?.fullName}
         </h1>
 
-        <h1 className="text-2xl text-white rounded rounded-t-none pt-0 p-1 bg-[#6862624a] text-center">
+        <h1 className="text-2xl text-white dark:text-[#2d2f43] rounded rounded-t-none pt-0 p-1 bg-[#4c4f703d] text-center">
           Let's start a conversation
         </h1>
       </div>
@@ -68,14 +68,17 @@ const MessageContainer = () => {
     <div
       className="flex flex-col flex-1 chatBackground"
       style={
-        chatBackground
+        chatBackground && chatBackground !== "translucent"
           ? {
               background: chatBackground,
             }
           : {}
       }
     >
-      <div className="flex gap-2 items-center bg-zinc-800 text-white px-4 py-2 mb-2">
+      <div
+        style={{ boxShadow: "rgba(0, 0, 0, 0.45) 0px 0px 11px 0px" }}
+        className="flex gap-2 items-center dark:bg-[#2d2f43] bg-white dark:text-white text-black px-4 py-2 mb-2"
+      >
         <div
           className={`avatar ${
             showOnlineStatus && isOnline(selectedUser._id) && "online"

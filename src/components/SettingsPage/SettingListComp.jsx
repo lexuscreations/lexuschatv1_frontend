@@ -2,15 +2,15 @@ import React from "react";
 import classNames from "classnames";
 
 const SettingListComp = ({ activeKey, dataToMap, onclickFn }) => (
-  <div className="bg-gray-100">
+  <div className="bg-gray-100 dark:bg-[#2d2f43]">
     <ul>
       {dataToMap.map((el, ind) => (
         <li
           key={el.key || ind}
           onClick={() => (onclickFn ? onclickFn(el.key) : () => {})}
           className={classNames(
-            "flex w-full items-center transition-all cursor-pointer hover:bg-gray-300 active:scale-[0.98] active:bg-gray-400",
-            { "bg-gray-300": activeKey === el.key }
+            "flex w-full items-center transition-all cursor-pointer hover:bg-gray-300 dark:hover:bg-[#4c4f70] active:scale-[0.98] active:bg-gray-400 dark:text-white text-black",
+            { "dark:bg-[#4c4f70] bg-gray-300": activeKey === el.key }
           )}
         >
           {el.Icon && <el.Icon className="h-full w-14 p-4 block" />}

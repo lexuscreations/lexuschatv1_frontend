@@ -76,14 +76,14 @@ const Registration = () => {
 
   return (
     <div className="lg:min-w-96 mx-auto">
-      <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-gray-100">
+      <div className="w-full p-6 rounded-lg text-black shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-gray-100">
         <h1 className="text-3xl font-bold text-center">Signup</h1>
 
         <form onSubmit={onSubmitHandler}>
           <div>
             <label className="label input-bordered flex flex-col items-start gap-2">
-              <span className="text-base label-text">Full Name</span>
-              <div className="flex items-center justify-between w-full relative">
+              <span className="text-base label-text text-black">Full Name</span>
+              <div className="flex items-center justify-between w-full relative dark:text-white">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 16 16"
@@ -98,7 +98,7 @@ const Registration = () => {
                   type="text"
                   value={user.fullName}
                   placeholder="Full Name"
-                  className="grow w-full input input-bordered h-10 pl-9"
+                  className="grow w-full input input-bordered h-10 pl-9 bg-white dark:bg-[#2d2f43] font-semibold"
                   onChange={(e) =>
                     setUser({ ...user, fullName: e.target.value })
                   }
@@ -110,8 +110,8 @@ const Registration = () => {
 
           <div>
             <label className="label input-bordered flex flex-col items-start gap-2">
-              <span className="text-base label-text">Username</span>
-              <div className="flex items-center justify-between w-full relative">
+              <span className="text-base label-text text-black">Username</span>
+              <div className="flex items-center justify-between w-full relative dark:text-white">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 16 16"
@@ -126,7 +126,7 @@ const Registration = () => {
                   type="text"
                   value={user.username}
                   placeholder="Username"
-                  className="grow w-full input input-bordered h-10 pl-9"
+                  className="grow w-full input input-bordered h-10 pl-9 bg-white dark:bg-[#2d2f43] font-semibold"
                   onChange={(e) =>
                     setUser({ ...user, username: e.target.value })
                   }
@@ -138,8 +138,8 @@ const Registration = () => {
 
           <div>
             <label className="label input-bordered flex flex-col items-start gap-2">
-              <span className="text-base label-text">Password</span>
-              <div className="flex items-center justify-between w-full relative">
+              <span className="text-base label-text text-black">Password</span>
+              <div className="flex items-center justify-between w-full relative dark:text-white">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 16 16"
@@ -158,7 +158,7 @@ const Registration = () => {
                   type="password"
                   value={user.password}
                   placeholder="Password"
-                  className="grow w-full input input-bordered h-10 pl-9"
+                  className="grow w-full input input-bordered h-10 pl-9 bg-white dark:bg-[#2d2f43] font-semibold"
                   onChange={(e) =>
                     setUser({ ...user, password: e.target.value })
                   }
@@ -170,8 +170,10 @@ const Registration = () => {
 
           <div>
             <label className="label input-bordered flex flex-col items-start gap-2">
-              <span className="text-base label-text">Confirm Password</span>
-              <div className="flex items-center justify-between w-full relative">
+              <span className="text-base label-text text-black">
+                Confirm Password
+              </span>
+              <div className="flex items-center justify-between w-full relative dark:text-white">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 16 16"
@@ -190,7 +192,7 @@ const Registration = () => {
                   type="password"
                   value={user.confirmPassword}
                   placeholder="Confirm Password"
-                  className="grow w-full input input-bordered h-10 pl-9"
+                  className="grow w-full input input-bordered h-10 pl-9 bg-white dark:bg-[#2d2f43] font-semibold"
                   onChange={(e) =>
                     setUser({ ...user, confirmPassword: e.target.value })
                   }
@@ -203,7 +205,7 @@ const Registration = () => {
           <div className="flex items-center my-4">
             <div className="form-control">
               <label className="label cursor-pointer">
-                <span className="label-text">Male</span>
+                <span className="label-text text-black">Male</span>
                 <input
                   required
                   type="radio"
@@ -218,14 +220,14 @@ const Registration = () => {
 
             <div className="form-control">
               <label className="label cursor-pointer">
-                <span className="label-text">Female</span>
+                <span className="label-text text-black">Female</span>
                 <input
                   required
                   type="radio"
                   name="radio-gender"
                   checked={user.gender === "female"}
                   onChange={() => handleCheckbox("female")}
-                  className="radio mx-2 checked:bg-[#626973]"
+                  className="radio mx-2 checked:bg-[#626973] border-gray-600"
                   aria-label="Female"
                 />
               </label>
@@ -242,7 +244,7 @@ const Registration = () => {
           <div>
             <button
               type="submit"
-              className="btn btn-block btn-sm mt-2 border border-slate-700"
+              className="btn btn-block btn-sm mt-2 border border-slate-700 bg-gray-50 hover:bg-gray-100 dark:bg-[#2d2f43] dark:hover:bg-slate-900"
               aria-label="Signup"
             >
               Signup

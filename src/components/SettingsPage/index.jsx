@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { setIsSettingsPageOpen } from "../../redux/uiSlice";
+import {
+  setChatBackground,
+  setGlobalLoading,
+  setIsSettingsPageOpen,
+} from "../../redux/uiSlice";
 
 import CloseBtn from "./CloseBtn";
 import SettingListComp from "./SettingListComp";
-import { settingsPrimaryKeySecondaryKeyTertiaryMap } from "./settingsConfig";
+import { initSettingsConfig, settingsConfigKeyMap } from "./settingsConfig";
 
 const SettingsPageContComp = () => {
   const [settingsPrimaryActiveKey, setSettingsPrimaryActiveKey] = useState("");
@@ -17,6 +21,65 @@ const SettingsPageContComp = () => {
   const dispatch = useDispatch();
 
   let settingsTertiaryActiveElObj;
+
+  const handlersFns = useMemo(
+    () => ({
+      [settingsConfigKeyMap.primary.settings_primary_account_key.key]: {
+        [settingsConfigKeyMap.primary.settings_primary_account_key.secondary
+          .settings_primary_account_secondary_privacy_key.key]: {
+          [settingsConfigKeyMap.primary.settings_primary_account_key.secondary
+            .settings_primary_account_secondary_privacy_key.tertiary
+            .settings_primary_account_secondary_privacy_tertiary_whoCanSeeMeOnline
+            .key]: {
+            onsaveHandlerFn: (val) => alert(val),
+          },
+          [settingsConfigKeyMap.primary.settings_primary_account_key.secondary
+            .settings_primary_account_secondary_privacy_key.tertiary
+            .settings_primary_account_secondary_privacy_tertiary_whoCanSeeMeTyping
+            .key]: {
+            onsaveHandlerFn: (val) => alert(val),
+          },
+          [settingsConfigKeyMap.primary.settings_primary_account_key.secondary
+            .settings_primary_account_secondary_privacy_key.tertiary
+            .settings_primary_account_secondary_privacy_tertiary_whoCanSeeMyProfilePic
+            .key]: {
+            onsaveHandlerFn: (val) => alert(val),
+          },
+        },
+      },
+      [settingsConfigKeyMap.primary.settings_primary_chat_key.key]: {
+        [settingsConfigKeyMap.primary.settings_primary_chat_key.secondary
+          .settings_primary_chat_secondary_wallpaper_key.key]: {
+          [settingsConfigKeyMap.primary.settings_primary_chat_key.secondary
+            .settings_primary_chat_secondary_wallpaper_key.tertiary
+            .settings_primary_chat_secondary_wallpaper_tertiary_chooseFromDefaultColors
+            .key]: {
+            onsaveHandlerFn: async (val) => {
+              try {
+                dispatch(setGlobalLoading(true));
+                // api call here only
+                setSettingsTertiaryActiveKey(null);
+                // if response === ok then only set chatBackground
+                dispatch(setChatBackground(val));
+              } catch (error) {
+                console.error(
+                  `Error while updating chatBackground: ${error.message}`
+                );
+              } finally {
+                dispatch(setGlobalLoading(false));
+              }
+            },
+          },
+        },
+      },
+    }),
+    [dispatch]
+  );
+
+  const settingsPrimaryKeySecondaryKeyTertiaryMap = useMemo(
+    () => initSettingsConfig(handlersFns),
+    [handlersFns]
+  );
 
   if (
     settingsPrimaryActiveKey &&

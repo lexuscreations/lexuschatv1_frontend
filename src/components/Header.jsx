@@ -79,7 +79,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="w-full lg:w-9/12 rounded-lg flex gap-2 items-center bg-zinc-800 text-white px-4 py-2 mb-2">
+    <div className="w-full lg:w-9/12 rounded-lg flex gap-2 items-center dark:bg-[#2d2f43] bg-white dark:text-white text-black px-4 py-2 mb-2">
       <div className={`avatar online`}>
         <div className="w-12 rounded-full">
           <img src={profilePhoto || avatarImage} alt="user" />
@@ -115,7 +115,10 @@ const Header = () => {
           </svg>
         </div>
 
-        <div className="card compact dropdown-content z-[1] shadow bg-base-100 rounded-box w-auto mt-2">
+        <div
+          style={{ boxShadow: "rgb(0 0 0 / 45%) 0px 0px 11px 0px" }}
+          className="card compact dropdown-content z-[1] rounded-box w-auto mt-2 dark:bg-[#2d2f43] bg-white dark:text-white text-black"
+        >
           <div className="card-body text-gray-500 font-bold flex flex-row">
             <h2>Username:</h2>
             <p>{username}</p>
@@ -136,14 +139,17 @@ const Header = () => {
           className="cursor-pointer m-1 transition-all hover:brightness-75 hover:scale-105 active:scale-95"
         />
 
-        <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 text-black w-auto rounded-box text-nowrap mt-[0.3rem]">
+        <ul
+          style={{ boxShadow: "rgb(0 0 0 / 45%) 0px 0px 11px 0px" }}
+          className="dropdown-content z-[1] menu p-2 shadow w-auto rounded-box text-nowrap mt-[0.3rem] dark:bg-[#2d2f43] bg-white dark:text-white text-black"
+        >
           <li>
             <button
               onClick={() => {
                 setIsActionDropdownOpen(false);
                 settingsHandler();
               }}
-              className="btn btn-sm"
+              className="btn btn-sm dark:bg-[#28293b] dark:border-none"
             >
               Settings
             </button>
@@ -155,7 +161,7 @@ const Header = () => {
                 setIsActionDropdownOpen(false);
                 logoutHandler();
               }}
-              className="btn btn-sm"
+              className="btn btn-sm dark:bg-[#28293b] dark:border-none"
             >
               Logout
             </button>

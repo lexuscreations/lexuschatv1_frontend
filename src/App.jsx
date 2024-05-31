@@ -11,6 +11,7 @@ import { setOnlineUsers } from "./redux/userSlice";
 import ErrorBoundary from "./components/ErrorBoundary";
 
 import Loading from "./components/Loading";
+import { setGlobalLoading } from "./redux/uiSlice";
 
 const HomePage = lazy(() => import("./pages/Home"));
 const Login = lazy(() => import("./pages/auth/Login"));
@@ -86,6 +87,10 @@ const App = () => {
       socketRef.current = null;
     }
   }, [authUser, dispatch, handleOnlineUsers]);
+
+  useEffect(() => {
+    dispatch(setGlobalLoading(false));
+  }, []);
 
   const memoizedRouter = useMemo(() => router, []);
 
